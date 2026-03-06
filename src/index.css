@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0a0a0f;
+  --color-foreground: #e2e8f0;
+  --color-muted: #1e1e2e;
+  --color-muted-foreground: #94a3b8;
+  --color-card: rgba(30, 30, 50, 0.6);
+  --color-card-foreground: #e2e8f0;
+  --color-border: rgba(139, 92, 246, 0.2);
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+  --color-accent-gold: #fbbf24;
+  --color-accent-cyan: #22d3ee;
+  --color-destructive: #ef4444;
+  --color-win-green: #22c55e;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+/* Glass morphism card */
+.glass {
+  background: var(--color-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+/* Reel strip animation */
+.reel-blur {
+  filter: blur(0.5px);
+}
+
+.reel-strip-stopping {
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 1.2);
+}
+
+@keyframes reelBounce {
+  0% { transform: translateY(-8px); }
+  40% { transform: translateY(3px); }
+  70% { transform: translateY(-1px); }
+  100% { transform: translateY(0); }
+}
+
+.reel-bounce {
+  animation: reelBounce 0.35s ease-out;
+}
+
+/* Win text stroke */
+.win-text-stroke {
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.5);
+  paint-order: stroke fill;
+}
+
+.win-text-stroke-heavy {
+  -webkit-text-stroke: 2px rgba(0, 0, 0, 0.5);
+  paint-order: stroke fill;
+}
+
+/* Win line pulse */
+@keyframes winPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.win-line-active {
+  animation: winPulse 0.8s ease-in-out infinite;
+}
+
+/* Glow effects */
+.glow-purple {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4), 0 0 30px rgba(139, 92, 246, 0.2);
+}
+
+.glow-gold {
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.4), 0 0 30px rgba(251, 191, 36, 0.2);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+}
+
+/* Symbol tier backgrounds */
+.symbol-tier-low {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.2), rgba(100, 116, 139, 0.05));
+}
+
+.symbol-tier-mid {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));
+}
+
+.symbol-tier-high {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(251, 191, 36, 0.05));
+}
+
+.symbol-tier-special {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.3), rgba(139, 92, 246, 0.2));
+}
+
+/* Machine frame gradient border */
+.machine-frame {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(251, 191, 36, 0.1));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.machine-frame::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #8b5cf6, #fbbf24, #8b5cf6);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Particle effect */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) scale(0);
+    opacity: 0;
+  }
+}
+
+.particle {
+  animation: floatUp 1.5s ease-out forwards;
+}
+
+/* Screen shake */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-4px) rotate(-0.5deg); }
+  30% { transform: translateX(4px) rotate(0.5deg); }
+  50% { transform: translateX(-3px) rotate(-0.3deg); }
+  70% { transform: translateX(3px) rotate(0.3deg); }
+  90% { transform: translateX(-1px); }
+}
+
+.screen-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+/* Number input styling */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
